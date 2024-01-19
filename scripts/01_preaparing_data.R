@@ -206,7 +206,7 @@ dades.pheno$crea=dades.pheno$crea*11.312
 
 #Kawasaki formula
 dades.pheno$pre_crea <- ifelse(dades.pheno$gender=="FEMALE",(-4.72*dades.pheno$age)+(8.58*dades.pheno$weight)+(5.09*dades.pheno$height)-74.5, (-12.63*dades.pheno$age)+(15.12*dades.pheno$weight)+(7.39*dades.pheno$height)-79.9 )
-dades.pheno$sodium_kawa=23*(16.3*sqrt((dades.pheno$sodium/(dades.pheno$crea*10))*dades.pheno$pre_crea))
+dades.pheno$sodium_kawa_original = dades.pheno$sodium_kawa = 23*(16.3*sqrt((dades.pheno$sodium/(dades.pheno$crea*10))*dades.pheno$pre_crea))
 dades.pheno$sodium_kawa=log(dades.pheno$sodium_kawa)
 
 dades.pheno=dades.pheno[which(dades.pheno$HBP_treat%in%0==T),]
