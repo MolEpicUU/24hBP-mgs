@@ -1,0 +1,13 @@
+mgs_id	species	met_id	metabolite	class	subclass	rho	pval	n
+hMGS.01559	Intestinimonas massiliensis	met_100001315	p-cresol sulfate	Xenobiotics	Benzoate Metabolism	0.38940879006452	1.98052554385855e-189	5742
+hMGS.01559	Intestinimonas massiliensis	met_100006191	p-cresol glucuronide*	Amino Acid	Tyrosine Metabolism	0.342488841386109	3.25116954399175e-144	5742
+hMGS.01559	Intestinimonas massiliensis	met_100001417	phenylacetylglutamine	Peptide	Acetylated Peptides	0.313016860599385	1.5502880033073e-119	5742
+hMGS.00094	ER4 sp900317525	met_100002021	5alpha-androstan-3beta,17alpha-diol disulfate	Lipid	Androgenic Steroids	0.34804353367633	3.53939884024276e-149	5742
+hMGS.00094	ER4 sp900317525	met_100000010	3-phenylpropionate (hydrocinnamate)	Xenobiotics	Benzoate Metabolism	0.320606132870078	1.24936593088931e-125	5742
+hMGS.00094	ER4 sp900317525	met_100002253	cinnamoylglycine	Xenobiotics	Food Component/Plant	0.293804847347883	6.80242565173014e-105	5742
+hMGS.00195	Dysosmobacter sp001916835	met_100002488	isoursodeoxycholate	Lipid	Secondary Bile Acid Metabolism	-0.255325307286364	8.18923656105754e-79	5742
+hMGS.00195	Dysosmobacter sp001916835	met_100000010	3-phenylpropionate (hydrocinnamate)	Xenobiotics	Benzoate Metabolism	0.223932407043641	1.3824939130764e-60	5742
+hMGS.00195	Dysosmobacter sp001916835	met_100000011	phenylacetate	Amino Acid	Phenylalanine Metabolism	0.206522294785797	1.31689287166386e-51	5742
+hMGS.01022	Streptococcus sp001556435	met_100002021	5alpha-androstan-3beta,17alpha-diol disulfate	Lipid	Androgenic Steroids	-0.207312457467665	5.35939291959397e-52	5742
+hMGS.01022	Streptococcus sp001556435	met_100003434	imidazole propionate	Amino Acid	Histidine Metabolism	0.147219932306736	8.57402999611146e-27	5742
+hMGS.01022	Streptococcus sp001556435	met_100002725	omeprazole	Xenobiotics	Drug - Gastrointestinal	0.145722717093063	2.80315677230494e-26	5742
