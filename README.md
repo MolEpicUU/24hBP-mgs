@@ -5,6 +5,7 @@
 Contains the analysis scripts.
 
 * 00_data_for_applying_CLR_transf.R Script to create the list of participants to apply CLR transformation
+* 00_clr_transformation_combined_data_CHAMP.R Script to CLR-transform the relative abundances
 * 01_preaparing_data.R has been used to process the data for the analyses performed in SCAPIS genearting the ambulatory blood pressure monitoring (ABPM) and non-ABPM subsamples.
 * 02_alpha_diversity.R has been used to generate the alpha diversity analysis results for ABPM subsample.
 * 02_alpha_diversity_validation.R has been used to generate the alpha diversity analysis results for non-ABPM subsample.
