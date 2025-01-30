@@ -2,7 +2,7 @@
 
 # scripts
 
-Contains the analysis scripts.
+Contains the analysis scripts and a folder with scripts for Figure 2 and S.Figure6 .
 
 * 00_data_for_applying_CLR_transf.R Script to create the list of participants to apply CLR transformation
 * 00_clr_transformation_combined_data_CHAMP.R Script to CLR-transform the relative abundances
