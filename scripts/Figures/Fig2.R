@@ -5,6 +5,7 @@ library(ggplot2)
 library(ggpubr)
 library(ggforce)
 library(ggnewscale)
+library(ggtext)
 library(data.table)
 
 #functions
@@ -139,8 +140,15 @@ xxx$var <- factor(xxx$var, ordered = T, levels=c(" SBP", "DBP"))
 xxx=merge(xxx,info[,c("var.x","maintax")],by="var.x")
 xxx$var.x=paste(xxx$maintax, "\n(",xxx$var.x,")",sep="")
 
+xxx$var.x=gsub("Dysosmobacter sp001916835\n(hMGS.00195)","*Dysosmobacter* sp001916835\n(hMGS.00195)",xxx$var.x,fixed=T)
+xxx$var.x=gsub("Intestinimonas massiliensis\n(hMGS.01559)","*Intestinimonas massiliensis*\n(hMGS.01559)",xxx$var.x,fixed=T)
+xxx$var.x=gsub("Streptococcus sp001556435\n(hMGS.01022)"," *Streptococcus* sp001556435\n(hMGS.01022)",xxx$var.x,fixed=T)
+xxx$var.x <- gsub("\n", "<br>", xxx$var.x, fixed = TRUE)
 
-t1=c("Streptococcus sp001556435\n(hMGS.01022)", "Intestinimonas massiliensis\n(hMGS.01559)")
+
+
+t1=c(" *Streptococcus* sp001556435\n(hMGS.01022)", "*Intestinimonas massiliensis*\n(hMGS.01559)")
+t1 <- gsub("\n", "<br>", t1, fixed = TRUE)
 
 ann_text<-data.frame(
         var.x=t1,
@@ -158,15 +166,16 @@ xxx$var.x=as.factor(xxx$var.x)
 x1=xxx[which(xxx$Model%in%grep("non-ABPM",xxx$Model,value=T)==F),]
 x2=xxx[which(xxx$Model%in%grep("non-ABPM",xxx$Model,value=T)==T),]
 
+xxx$Model=factor(xxx$Model,level=rev(levels(xxx$Model)))
 
 f3=ggplot(data=xxx) +
-geom_point(data=xxx,aes(reorder(var.x, estimate), y = -500, color=Model),size = 2,position=position_dodge2(0.9),show.legend = F)+
+geom_point(data=xxx,aes(reorder(var.x, estimate), y = -500, color=Model),size = 4,position=position_dodge2(0.9),show.legend = F)+
  geom_rect(aes(xmin = 1-0.5 , xmax =1+0.5 , ymin = -Inf, ymax = Inf), fill="grey90",color=NA,alpha = 0.1)+
  geom_rect(aes(xmin = 3-0.5 , xmax =3+0.5 , ymin = -Inf, ymax = Inf), fill="grey90",color=NA,alpha = 0.1)+
 # geom_rect(aes(xmin = 53-0.5 , xmax =53+0.5 , ymin = -Inf, ymax = Inf), fill="grey90",color=NA,alpha = 0.1)+
 
    geom_hline(yintercept=0, lty=2) +
-geom_text(data=ann_text,aes(x=reorder(var.x, estimate),y=-0.3),label=ann_text$Label,size=7,color="black",fontface ="bold")+
+geom_text(data=ann_text,aes(x=reorder(var.x, estimate),y=-0.15),label=ann_text$Label,size=7,color="black",fontface ="bold")+
   theme_bw()+
 theme(
 panel.background = element_rect(fill = "white"),
@@ -176,12 +185,13 @@ panel.background = element_rect(fill = "white"),
         panel.grid.minor.x = element_blank(),
         axis.title.y = element_blank(),
         axis.title.x = element_text(size=20),
-        axis.text.y = element_text(size=15, face="italic"), #element_blank(),# this makes the horizontal Strep labels disappear. If you want to allow them back in remove the element_blank() and add this element_text(size=9)
+        #axis.text.y = element_text(size=15, face="italic"), #element_blank(),# this makes the horizontal Strep labels disappear. If you want to allow them back in remove the element_blank() and add this element_text(size=9)
+axis.text.y = element_markdown(size=15),
         axis.text.x = element_text(size=20),
         axis.ticks.length=unit(0,"cm"),
 legend.title=element_text(size=20),
 
-        legend.position="top",
+        legend.position="none",
         legend.key.size = unit(0.5,"cm"),
         legend.text = element_text(size=20),
 
@@ -201,12 +211,12 @@ values = c("#0077BB",  "#33BBEE",  "red4"),
 labels=c("a",  "b",  "c"),
 guides(color="none"))+
   new_scale_color()+
- geom_point(data=x1,aes(x=reorder(var.x, estimate), y = -500, color=Model),size = 2,position=position_dodge2(1))+
+ geom_point(data=x1,aes(x=reorder(var.x, estimate), y = -500, color=Model),size = 4,position=position_dodge2(1))+
 scale_color_manual(name="ABPM cohort:",
 values = c("red4","#0077BB"),
 labels=c("24-hours BP Model 1","24-hours BP Model 2"))+
 new_scale_color()+
-geom_point(data=x2,aes(x=reorder(var.x, estimate), y = -500, color=Model),size = 2,position=position_dodge2(0.9))+
+geom_point(data=x2,aes(x=reorder(var.x, estimate), y = -500, color=Model),size = 4,position=position_dodge2(0.9))+
 scale_color_manual(name="non-ABPM cohort:",
 values = "#33BBEE",
 labels="Office BP")+
@@ -220,10 +230,10 @@ facet_wrap_custom(~var,ncol=2,scales = "free_x", scale_overrides = list(
 xlab("MGS") + ylab("Estimate")+
 #ylim(round(min(xxx$lower))-1,round(max(xxx$upper))+1)+
  new_scale_color()+
-geom_point(data=xxx,aes(reorder(var.x,estimate), y = estimate, color=Model),size = 1.8,position=position_dodge2(0.75),show.legend = F)+
+geom_point(data=xxx,aes(reorder(var.x,estimate), y = estimate, color=Model),size = 3.5,position=position_dodge2(0.75),show.legend = F)+
 geom_errorbar(data=xxx,aes(x=reorder(var.x,estimate),y=estimate,ymax = upper, ymin = lower,color=Model),position=position_dodge2(1),width=0.75,show.legend = F)+
 scale_color_manual(name="a",
-values = c("#0077BB","#33BBEE","red4" ),
+values = c("#33BBEE","#0077BB","red4" ),
 labels=c("x","y","z"),
 guides(color="none"))+
  guides(color = guide_legend(reverse=T))
@@ -231,5 +241,3 @@ guides(color="none"))+
 
 
 ggsave(f3,file="results/figures/figure2.pdf",width=17)
-
-
